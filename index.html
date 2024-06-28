@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Range to CIDR Converter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">IP Range to CIDR Converter</h1>
+        <form method="POST" class="mt-4">
+            <div class="form-group">
+                <label for="ip_range">Enter IP Range (e.g., 10.10.10.0-10.10.10.128):</label>
+                <input type="text" id="ip_range" name="ip_range" class="form-control" required value="{{ ip_range }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+        {% if ip_range %}
+        <div class="mt-4">
+            <h2>Entered IP Range: {{ ip_range }}</h2>
+        </div>
+        {% endif %}
+        {% if cidr_list %}
+        <div class="mt-4">
+            <h2>Converted CIDR Blocks:</h2>
+            <ul class="list-group mt-2">
+                {% for cidr in cidr_list %}
+                <li class="list-group-item">{{ cidr }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <div class="mt-4">
+            <h2>No CIDR blocks to display</h2>
+        </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
